@@ -1,0 +1,23 @@
+@import "../assets/styles/partials/variables";
+
+.shop-sections-list {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: $md) {
+  .shop-sections-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    gap: 1rem;
+
+    .shop-section:nth-child(n + 4) {
+      grid-column: span 3;
+    }
+
+    .shop-section:nth-child(-n + 3) {
+      grid-column: span 2;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import "tailwind.output.css";
+
+@import "partials/variables";
+
+html,
+body,
+#root {
+  height: 100%;
+  font-size: 14px;
+}
