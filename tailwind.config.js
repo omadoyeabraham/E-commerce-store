@@ -7,8 +7,14 @@ module.exports = {
     "public/**/*.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: ["Open Sans Condensed", "Helvetica", "Arial", "sans-serif"],
+      },
+    },
   },
-  variants: {},
+  variants: {
+    opacity: ["responsive", "hover", "focus", "group-hover"],
+  },
   plugins: [],
 };

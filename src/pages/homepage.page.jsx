@@ -1,5 +1,6 @@
 import React from "react";
 
+import StoreSections from "../components/store-sections/store-sections.component";
 import "./homepage.page.scss";
 
 /**
@@ -11,50 +12,41 @@ import "./homepage.page.scss";
 const HomePage = (props) => {
   const sections = [
     {
+      title: "hats",
+      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
       id: 1,
-      title: "men",
-      subtitle: "shop now",
+      linkUrl: "shop/hats",
     },
     {
+      title: "jackets",
+      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
       id: 2,
-      title: "women",
-      subtitle: "shop now",
+      linkUrl: "shop/jackets",
     },
     {
+      title: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
       id: 3,
-      title: "girls",
-      subtitle: "shop now",
+      linkUrl: "shop/sneakers",
     },
     {
+      title: "womens",
+      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
+      size: "large",
       id: 4,
-      title: "boys",
-      subtitle: "shop now",
+      linkUrl: "shop/womens",
     },
     {
+      title: "mens",
+      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
+      size: "large",
       id: 5,
-      title: "tech",
-      subtitle: "shop now",
+      linkUrl: "shop/mens",
     },
   ];
   return (
     <div className="homepage px-10 pt-10">
-      <div className="shop-sections-list">
-        {sections.map((section) => (
-          <div
-            key={section.id}
-            className="shop-section border border-gray-700 flex flex-col justify-center items-center text-center py-12"
-          >
-            <div className="shop-section--content border border-gray-700 py-6 px-8">
-              <h1 className="shop-section--title text-bold text-4xl uppercase">
-                {section.title}
-              </h1>
-              <span className="shop-section--subtitle block uppercase">
-                {section.subtitle}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <StoreSections sections={sections}></StoreSections>
     </div>
   );
 };
