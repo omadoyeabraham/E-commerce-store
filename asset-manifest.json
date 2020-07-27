@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/e-commerce-store/static/css/main.1f86e2ad.chunk.css",
-    "main.js": "/e-commerce-store/static/js/main.a414e127.chunk.js",
-    "main.js.map": "/e-commerce-store/static/js/main.a414e127.chunk.js.map",
+    "main.css": "/e-commerce-store/static/css/main.4d707695.chunk.css",
+    "main.js": "/e-commerce-store/static/js/main.9112df62.chunk.js",
+    "main.js.map": "/e-commerce-store/static/js/main.9112df62.chunk.js.map",
     "runtime-main.js": "/e-commerce-store/static/js/runtime-main.df89bad5.js",
     "runtime-main.js.map": "/e-commerce-store/static/js/runtime-main.df89bad5.js.map",
-    "static/js/2.e8b7fb9f.chunk.js": "/e-commerce-store/static/js/2.e8b7fb9f.chunk.js",
-    "static/js/2.e8b7fb9f.chunk.js.map": "/e-commerce-store/static/js/2.e8b7fb9f.chunk.js.map",
+    "static/js/2.c1cc501a.chunk.js": "/e-commerce-store/static/js/2.c1cc501a.chunk.js",
+    "static/js/2.c1cc501a.chunk.js.map": "/e-commerce-store/static/js/2.c1cc501a.chunk.js.map",
     "index.html": "/e-commerce-store/index.html",
-    "precache-manifest.cb5fddafce6aa9fd5ba36db66bad46e6.js": "/e-commerce-store/precache-manifest.cb5fddafce6aa9fd5ba36db66bad46e6.js",
+    "precache-manifest.4b58a6f3520da20d4b299074b62d6a46.js": "/e-commerce-store/precache-manifest.4b58a6f3520da20d4b299074b62d6a46.js",
     "service-worker.js": "/e-commerce-store/service-worker.js",
-    "static/css/main.1f86e2ad.chunk.css.map": "/e-commerce-store/static/css/main.1f86e2ad.chunk.css.map",
-    "static/js/2.e8b7fb9f.chunk.js.LICENSE.txt": "/e-commerce-store/static/js/2.e8b7fb9f.chunk.js.LICENSE.txt",
-    "static/media/main.scss": "/e-commerce-store/static/media/OpenSansCondensed-Light.3589bddb.ttf"
+    "static/css/main.4d707695.chunk.css.map": "/e-commerce-store/static/css/main.4d707695.chunk.css.map",
+    "static/js/2.c1cc501a.chunk.js.LICENSE.txt": "/e-commerce-store/static/js/2.c1cc501a.chunk.js.LICENSE.txt",
+    "static/media/main.scss": "/e-commerce-store/static/media/OpenSansCondensed-Light.3589bddb.ttf",
+    "static/media/logo.ed28accb.svg": "/e-commerce-store/static/media/logo.ed28accb.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.df89bad5.js",
-    "static/js/2.e8b7fb9f.chunk.js",
-    "static/css/main.1f86e2ad.chunk.css",
-    "static/js/main.a414e127.chunk.js"
+    "static/js/2.c1cc501a.chunk.js",
+    "static/css/main.4d707695.chunk.css",
+    "static/js/main.9112df62.chunk.js"
   ]
 }
