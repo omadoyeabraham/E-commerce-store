@@ -1,6 +1,6 @@
 import React from "react";
 
-import StoreSections from "../components/store-sections/store-sections.component";
+import StoreSections from "../../components/store-sections/store-sections.component";
 import "./homepage.page.scss";
 
 /**
