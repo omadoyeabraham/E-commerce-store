@@ -1,6 +1,7 @@
 import React from "react";
 
 import StoreSectionItem from "../store-section-item/store-section-item.component";
+import "./store-sections.scss";
 
 /**
  * Grid of item categories in the store that is displayed on the homepage

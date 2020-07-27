@@ -265,7 +265,7 @@ class ShopPage extends Component {
   render() {
     const { collections } = this.state;
     return (
-      <div className="p-10">
+      <div className="py-10">
         <h1 className="text-5xl font-extrabold mb-4">Collections</h1>
         {collections.map((collection) => (
           <CollectionPreview
