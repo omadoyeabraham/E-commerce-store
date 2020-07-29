@@ -26,7 +26,7 @@ const CustomButton = ({ children, ...otherProps }) => {
       {...otherProps}
       className={
         "text-white font-bold py-4 px-8 focus:outline-none focus:shadow-outline text-xl uppercase " +
-        `bg-${color}-${intensity[0]} hover:bg-${color}-${intensity[1]}`
+        `border bg-${color}-${intensity[0]} hover:text-${color}-${intensity[0]} hover:bg-white hover:border-${color}-${intensity[0]}`
       }
     >
       {children}

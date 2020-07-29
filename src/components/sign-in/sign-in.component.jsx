@@ -38,7 +38,7 @@ export default class SignIn extends React.Component {
     return (
       <div>
         <h2 className="font-bold text-3xl">I already have an account</h2>
-        <span>Sign with your email and password</span>
+        <span>Sign in with your email and password</span>
 
         <form onSubmit={this.handleSignIn}>
           <div className="mt-8 mb-8">

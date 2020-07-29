@@ -6,6 +6,7 @@ import HomePage from "./pages/homepage/homepage.page";
 import ShopPage from "./pages/shop/shop.page";
 import AuthPage from "./pages/auth/auth.page";
 import Navbar from "./components/navbar/navbar.component";
+import UsersService from "./services/users.service";
 import { auth } from "./firebase/firebase.utils";
 
 export default class App extends React.Component {
@@ -20,8 +21,23 @@ export default class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (authUser) => {
+      if (authUser) {
+        const userRef = await UsersService.createAuthenticatedUserProfile(
+          authUser
+        );
+
+        userRef.onSnapshot((snapshot) => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
+          });
+        });
+      } else {
+        this.setState({ currentUser: null });
+      }
     });
   }
 
