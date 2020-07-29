@@ -2,7 +2,6 @@ import React from "react";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import { auth } from "../../firebase/firebase.utils";
 import UsersService from "../../services/users.service";
 
 /**
@@ -34,12 +33,12 @@ class SignUp extends React.Component {
     }
 
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
+      const { user } = await UsersService.signUpWithEmailAndPassword(
         email,
         password
       );
 
-      await UsersService.createAuthenticatedGoogleUserProfile(user, {
+      await UsersService.createAuthenticatedUserProfile(user, {
         displayName,
       });
       this.setState({

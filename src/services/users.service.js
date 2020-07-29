@@ -1,4 +1,4 @@
-import { firestore } from "../firebase/firebase.utils";
+import { firestore, auth } from "../firebase/firebase.utils";
 
 /**
  * Users Service
@@ -36,5 +36,19 @@ export default class UserService {
     }
 
     return userRef;
+  };
+
+  /**
+   * Sign up with email and password using firebase firestore
+   */
+  static signUpWithEmailAndPassword = async (email, password) => {
+    return auth.createUserWithEmailAndPassword(email, password);
+  };
+
+  /**
+   * Sign in with email and password using firebase firestore
+   */
+  static signInWithEmailAndPassword = async (email, password) => {
+    return auth.signInWithEmailAndPassword(email, password);
   };
 }
