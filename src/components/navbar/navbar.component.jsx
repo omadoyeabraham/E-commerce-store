@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 import { auth } from "../../firebase/firebase.utils";
+import CartNavLink from "../cart-nav-link/cart-nav-link.component";
 
 /**
  * Navigation bar used across all pages
@@ -17,7 +18,7 @@ const Navbar = ({ currentUser }) => {
       <Link to="/">
         <Logo></Logo>
       </Link>
-      <div className="text-gray-900 text-2xl font-extrabold">
+      <div className="text-gray-900 text-2xl font-extrabold flex justify-center items-center">
         <Link to="/shop" className="px-4">
           SHOP
         </Link>
@@ -37,6 +38,8 @@ const Navbar = ({ currentUser }) => {
             SIGN IN
           </Link>
         )}
+
+        <CartNavLink></CartNavLink>
       </div>
     </nav>
   );
