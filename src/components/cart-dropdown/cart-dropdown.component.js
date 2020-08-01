@@ -1,7 +1,5 @@
 import React from "react";
 
-import CustomButton from "../custom-button/custom-button.component";
-
 /**
  * Dropdown which shows all the items in the cart from the navigation bar
  *

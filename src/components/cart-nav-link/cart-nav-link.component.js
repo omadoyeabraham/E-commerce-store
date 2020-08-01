@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { toggleCartHidden } from "../../store/cart/cart.actions";
-import { getTotalQuantityOfItemsInCart } from "../../store/cart/cart.utils";
+import {
+  selectCartItemsTotalQuantity,
+  selectCartItems,
+  selectCartState,
+} from "../../store/cart/cart.selectors";
 
 /**
  * Link in the navbar which shows the number of items in the cart
@@ -21,13 +25,17 @@ class CartNavLink extends React.Component {
   }
 
   render() {
-    const { cartItems, cartDropDownHidden, toggleCartDropDown } = this.props;
-    const numberOfCartItems = getTotalQuantityOfItemsInCart(cartItems);
+    const {
+      cartItems,
+      cartDropDownHidden,
+      toggleCartDropDown,
+      totalQuantityOfItemsInCart,
+    } = this.props;
 
     return (
       <div className="relative">
         <CartIcon
-          numberOfCartItems={numberOfCartItems}
+          numberOfCartItems={totalQuantityOfItemsInCart}
           handleClick={toggleCartDropDown}
         ></CartIcon>
         {cartDropDownHidden ? null : (
@@ -38,9 +46,10 @@ class CartNavLink extends React.Component {
   }
 }
 
-const mapStateToProps = ({ cart }) => ({
-  cartItems: cart.items,
-  cartDropDownHidden: cart.hidden,
+const mapStateToProps = (state) => ({
+  cartItems: selectCartItems(state),
+  cartDropDownHidden: selectCartState(state).hidden,
+  totalQuantityOfItemsInCart: selectCartItemsTotalQuantity(state),
 });
 
 const mapDispatchToPros = (dispatch) => ({

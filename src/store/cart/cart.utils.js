@@ -15,11 +15,3 @@ export const addItemToCart = (cartItems, newItem) => {
 
   return [...cartItems, { ...newItem, quantity: 1 }];
 };
-
-/**
- * Determine the total quantity of items in the cart
- *
- * @param {*} cartItems
- */
-export const getTotalQuantityOfItemsInCart = (cartItems) =>
-  cartItems.reduce((total, item) => item.quantity + total, 0);
