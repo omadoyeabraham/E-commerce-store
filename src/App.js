@@ -6,10 +6,13 @@ import "./assets/styles/main.scss";
 import HomePage from "./pages/homepage/homepage.page";
 import ShopPage from "./pages/shop/shop.page";
 import AuthPage from "./pages/auth/auth.page";
+import CheckoutPage from "./pages/checkout/checkout.page";
+
 import Navbar from "./components/navbar/navbar.component";
 import UsersService from "./services/users.service";
 import { auth } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.actions";
+import { selectCurrentUser } from "./store/user/user.selectors";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -52,6 +55,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/shop" component={ShopPage} />
+            <Route exact path="/checkout" component={CheckoutPage} />
             <Route
               exact
               path="/auth"
@@ -66,8 +70,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = (state) => ({
+  currentUser: selectCurrentUser(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

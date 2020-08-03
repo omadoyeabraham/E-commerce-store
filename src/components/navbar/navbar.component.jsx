@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 import { auth } from "../../firebase/firebase.utils";
 import CartNavLink from "../cart-nav-link/cart-nav-link.component";
+import { selectCurrentUser } from "../../store/user/user.selectors";
+import { createStructuredSelector } from "reselect";
 
 /**
  * Navigation bar used across all pages
@@ -49,8 +51,8 @@ const Navbar = ({ currentUser }) => {
  * Map redux store state data to props on this component
  * @param {*} state
  */
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(Navbar);
