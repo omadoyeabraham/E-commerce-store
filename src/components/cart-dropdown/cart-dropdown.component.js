@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
-import { toggleCartHidden } from "../../store/cart/cart.actions"
+import { toggleCartHidden } from "../../store/cart/cart.actions";
 
 /**
  * Dropdown which shows all the items in the cart from the navigation bar
@@ -14,15 +14,14 @@ class CartDropdown extends React.Component {
    * Called when the user clicks on the go to checkout button
    */
   handleGoToCheckout = () => {
-    const { history, closeCartDropdown } = this.props
+    const { history, closeCartDropdown } = this.props;
 
     closeCartDropdown();
-    history.push("/checkout")
-  }
-
+    history.push("/checkout");
+  };
 
   render() {
-    const { cartItems, history } = this.props
+    const { cartItems } = this.props;
     return (
       <div
         style={{
@@ -78,7 +77,7 @@ class CartDropdown extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  closeCartDropdown: () => dispatch(toggleCartHidden())
-})
+  closeCartDropdown: () => dispatch(toggleCartHidden()),
+});
 
 export default withRouter(connect(null, mapDispatchToProps)(CartDropdown));

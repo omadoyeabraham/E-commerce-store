@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 
 import {
   removeItemFromCart,
@@ -9,8 +9,8 @@ import {
 
 /**
  * Single row for displaying data about an item in the checkout page
- * 
- * @param {*} param0 
+ *
+ * @param {*} param0
  */
 const CheckoutItem = ({ item, addToCart, removeFromCart, deleteFromCart }) => {
   return (
@@ -18,6 +18,7 @@ const CheckoutItem = ({ item, addToCart, removeFromCart, deleteFromCart }) => {
       <td>
         <img
           src={item.imageUrl}
+          alt="Item"
           className="checkout-page--item-image bg-cover bg-center my-4"
         />
       </td>
@@ -28,22 +29,22 @@ const CheckoutItem = ({ item, addToCart, removeFromCart, deleteFromCart }) => {
           onClick={() => addToCart(item)}
         >
           &#10094;
-                  </span>
+        </span>
         <span className="mx-4">{item.quantity}</span>
         <span
           className="font-extrabold text-3xl cursor-pointer"
           onClick={() => removeFromCart(item)}
         >
           &#10095;
-                  </span>
+        </span>
       </td>
       <td>${item.price}</td>
       <td className="text-center font-extrabold text-3xl cursor-pointer">
         <span onClick={() => deleteFromCart(item)}>&#9747;</span>
       </td>
     </tr>
-  )
-}
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   removeFromCart: (item) => dispatch(removeItemFromCart(item)),
