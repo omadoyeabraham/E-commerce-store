@@ -4,15 +4,12 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./checkout.scss";
-import { selectCartItems } from "../../store/cart/cart.selectors";
-import {
-  removeItemFromCart,
-  deleteItemFromCart,
-  addItemToCart,
-} from "../../store/cart/cart.actions";
+import { selectCartItems, selectCartItemsTotalAmount } from "../../store/cart/cart.selectors";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component"
 
 const CheckoutPage = ({
   cartItems,
+  cartTotalAmount,
   removeFromCart,
   deleteFromCart,
   addToCart,
@@ -38,51 +35,21 @@ const CheckoutPage = ({
               </td>
             </tr>
           ) : (
-            cartItems.map((item) => (
-              <tr key={item.id} className="text-2xl border-b-2 border-gray-400">
-                <td>
-                  <img
-                    src={item.imageUrl}
-                    className="checkout-page--item-image bg-cover bg-center my-4"
-                  />
-                </td>
-                <td>{item.name}</td>
-                <td>
-                  <span
-                    className="font-extrabold text-3xl cursor-pointer"
-                    onClick={() => addToCart(item)}
-                  >
-                    &uArr;
-                  </span>
-                  <span className="mx-4">{item.quantity}</span>
-                  <span
-                    className="font-extrabold text-3xl cursor-pointer"
-                    onClick={() => removeFromCart(item)}
-                  >
-                    &dArr;
-                  </span>
-                </td>
-                <td>${item.price}</td>
-                <td className="text-center font-extrabold text-3xl cursor-pointer">
-                  <span onClick={() => deleteFromCart(item)}>&#9747;</span>
-                </td>
-              </tr>
-            ))
-          )}
+              cartItems.map((item) => (
+                <CheckoutItem key={item.id} item={item}></CheckoutItem>
+              ))
+            )}
         </tbody>
       </table>
+
+      {!cartItems.length ? null : (<div className="mt-8 text-right text-5xl font-bold">Total: ${cartTotalAmount}</div>)}
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
+  cartTotalAmount: selectCartItemsTotalAmount
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  removeFromCart: (item) => dispatch(removeItemFromCart(item)),
-  deleteFromCart: (item) => dispatch(deleteItemFromCart(item)),
-  addToCart: (item) => dispatch(addItemToCart(item)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);
+export default connect(mapStateToProps)(CheckoutPage);
