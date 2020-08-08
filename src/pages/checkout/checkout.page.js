@@ -4,8 +4,12 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./checkout.scss";
-import { selectCartItems, selectCartItemsTotalAmount } from "../../store/cart/cart.selectors";
-import CheckoutItem from "../../components/checkout-item/checkout-item.component"
+import {
+  selectCartItems,
+  selectCartItemsTotalAmount,
+} from "../../store/cart/cart.selectors";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 
 const CheckoutPage = ({
   cartItems,
@@ -35,21 +39,36 @@ const CheckoutPage = ({
               </td>
             </tr>
           ) : (
-              cartItems.map((item) => (
-                <CheckoutItem key={item.id} item={item}></CheckoutItem>
-              ))
-            )}
+            cartItems.map((item) => (
+              <CheckoutItem key={item.id} item={item}></CheckoutItem>
+            ))
+          )}
         </tbody>
       </table>
 
-      {!cartItems.length ? null : (<div className="mt-8 text-right text-5xl font-bold">Total: ${cartTotalAmount}</div>)}
+      {!cartItems.length ? null : (
+        <div>
+          <div className="mt-8 text-right text-5xl font-bold">
+            Total: ${cartTotalAmount}
+          </div>
+          <StripeCheckoutButton price={cartTotalAmount}></StripeCheckoutButton>
+          <div className="bg-red-300 font-semibold mt-8 p-8 text-4xl rounded-lg">
+            *Please use the following test credit card for payment*
+            <ul className="mt-4 text-3xl">
+              <li>Card Number: 4242 4242 4242 4242</li>
+              <li>Expiry Date: 01/21</li>
+              <li>CVV: 123</li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
-  cartTotalAmount: selectCartItemsTotalAmount
+  cartTotalAmount: selectCartItemsTotalAmount,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
