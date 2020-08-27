@@ -16,10 +16,10 @@ export default class UserService {
     if (!authUser) return;
 
     const userRef = firestore.doc(`users/${authUser.uid}`);
-    const userData = await userRef.get();
+    const userSnapshot = await userRef.get();
 
     // We only store user data in the user's collection if the user does not already exist
-    if (!userData.exists) {
+    if (!userSnapshot.exists) {
       const { displayName, email } = authUser;
       const createdAt = new Date();
 

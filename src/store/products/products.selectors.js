@@ -14,11 +14,11 @@ export const selectProductCollections = createSelector(
 
 export const selectProductCollectionsAsArray = createSelector(
   [selectProductCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
 );
 
 export const selectProductCollectionById = (collectionId) =>
-  createSelector(
-    [selectProductCollections],
-    (collections) => collections[collectionId]
+  createSelector([selectProductCollections], (collections) =>
+    collections ? collections[collectionId] : null
   );

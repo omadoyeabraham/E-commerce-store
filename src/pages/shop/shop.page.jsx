@@ -10,7 +10,6 @@ import CollectionPage from "../collection/collection.page";
  * @type container component
  */
 const ShopPage = ({ match }) => {
-  console.log(match);
   return (
     <div className="py-10">
       <Switch>
