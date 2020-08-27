@@ -36,7 +36,9 @@ const INITIAL_STATE = {
       linkUrl: "shop/mens",
     },
   ],
-  collections: {},
+  collections: null,
+  isFetching: false,
+  errorMessage: null,
 };
 
 const productsReducer = (state = INITIAL_STATE, action) => {
@@ -45,6 +47,26 @@ const productsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         collections: normalizeProductCollectionsArray(action.payload),
+      };
+
+    case ProductsActions.FETCH_PRODUCT_COLLECTIONS_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+
+    case ProductsActions.FETCH_PRODUCT_COLLECTIONS_SUCCESS:
+      return {
+        ...state,
+        collections: normalizeProductCollectionsArray(action.payload),
+        isFetching: false,
+      };
+
+    case ProductsActions.FETCH_PRODUCT_COLLECTIONS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
       };
 
     default:

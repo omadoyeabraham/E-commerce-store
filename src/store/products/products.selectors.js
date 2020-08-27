@@ -19,6 +19,11 @@ export const selectProductCollectionsAsArray = createSelector(
 );
 
 export const selectProductCollectionById = (collectionId) =>
-  createSelector([selectProductCollections], (collections) =>
-    collections ? collections[collectionId] : null
-  );
+  createSelector([selectProductCollections], (collections) => {
+    return collections ? collections[collectionId] : null;
+  });
+
+export const selectIsFetchingCollections = createSelector(
+  [selectProductsState],
+  (productsState) => productsState.isFetching
+);
