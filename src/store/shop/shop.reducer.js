@@ -1,5 +1,5 @@
-import { ProductsActions } from "./products.actions";
-import { normalizeProductCollectionsArray } from "./products.utils";
+import { SHOP_ACTIONS } from "./shop.actions";
+import { normalizeShopCollectionsArray } from "./shop.utils";
 
 const INITIAL_STATE = {
   sections: [
@@ -41,28 +41,34 @@ const INITIAL_STATE = {
   errorMessage: null,
 };
 
-const productsReducer = (state = INITIAL_STATE, action) => {
+/**
+ * Reducer for the shop section of state
+ *
+ * @param {*} state
+ * @param {*} action
+ */
+const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ProductsActions.STORE_PRODUCT_COLLECTIONS_MAP:
+    case SHOP_ACTIONS.STORE_SHOP_COLLECTIONS_MAP:
       return {
         ...state,
-        collections: normalizeProductCollectionsArray(action.payload),
+        collections: normalizeShopCollectionsArray(action.payload),
       };
 
-    case ProductsActions.FETCH_PRODUCT_COLLECTIONS_START:
+    case SHOP_ACTIONS.FETCH_SHOP_COLLECTIONS_START:
       return {
         ...state,
         isFetching: true,
       };
 
-    case ProductsActions.FETCH_PRODUCT_COLLECTIONS_SUCCESS:
+    case SHOP_ACTIONS.FETCH_SHOP_COLLECTIONS_SUCCESS:
       return {
         ...state,
-        collections: normalizeProductCollectionsArray(action.payload),
+        collections: normalizeShopCollectionsArray(action.payload),
         isFetching: false,
       };
 
-    case ProductsActions.FETCH_PRODUCT_COLLECTIONS_FAILURE:
+    case SHOP_ACTIONS.FETCH_SHOP_COLLECTIONS_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -74,4 +80,4 @@ const productsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default productsReducer;
+export default shopReducer;

@@ -1,10 +1,11 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
+import "./store-sections.scss";
+import { selectShopSections } from "../../store/shop/shop.selectors";
 
 import StoreSectionItem from "../store-section-item/store-section-item.component";
-import "./store-sections.scss";
-import { createStructuredSelector } from "reselect";
-import { selectProductSections } from "../../store/products/products.selectors";
 
 /**
  * Grid of item categories in the store that is displayed on the homepage
@@ -23,7 +24,7 @@ const StoreSections = ({ sections }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  sections: selectProductSections
-})
+  sections: selectShopSections,
+});
 
 export default connect(mapStateToProps)(StoreSections);
