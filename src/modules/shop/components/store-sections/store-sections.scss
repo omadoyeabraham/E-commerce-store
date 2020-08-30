@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/partials/variables";
+
+.store-sections-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: repeat(5, 300px);
+}
+
+.store-section--image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: $md) {
+  .store-sections-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 300px) 380px;
+    gap: 1rem;
+
+    .store-section:nth-child(5) {
+      grid-column: span 2;
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  .store-sections-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 300px 380px;
+    gap: 1rem;
+
+    .store-section:nth-child(n + 4) {
+      grid-column: span 3;
+    }
+
+    .store-section:nth-child(-n + 3) {
+      grid-column: span 2;
+    }
+  }
+}

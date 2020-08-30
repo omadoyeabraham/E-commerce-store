@@ -1,7 +1,7 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
 
-import { firestore } from "../../firebase/firebase.utils";
-import { convertCollectionSnapShotToMap } from "../../firebase/data.utils";
+import { firestore } from "../../modules/firebase/firebase.utils";
+import { convertCollectionSnapShotToMap } from "../../modules/firebase/data.utils";
 
 import {
   SHOP_ACTIONS,

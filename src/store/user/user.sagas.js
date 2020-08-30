@@ -10,8 +10,8 @@ import {
   auth,
   googleAuthprovider,
   getCurrentUser,
-} from "../../firebase/firebase.utils";
-import UserService from "../../services/users.service";
+} from "../../modules/firebase/firebase.utils";
+import AuthService from "../../modules/auth/services/auth.service";
 
 /**
  * The Root saga for users
@@ -72,7 +72,7 @@ export function* signOut() {
 export function* getSnapShotFromUserAuth(userAuth) {
   try {
     const userRef = yield call(
-      UserService.createAuthenticatedUserProfile,
+      AuthService.createAuthenticatedUserProfile,
       userAuth
     );
     const userSnapshot = yield userRef.get();

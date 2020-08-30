@@ -5,12 +5,12 @@ import { createStructuredSelector } from "reselect";
 
 import "./assets/styles/main.scss";
 
-import HomePage from "./pages/homepage/homepage.page";
-import ShopPage from "./pages/shop/shop.page";
-import AuthPage from "./pages/auth/auth.page";
-import CheckoutPage from "./pages/checkout/checkout.page";
+import HomePage from "./modules/common/pages/homepage/homepage.page";
+import ShopPage from "./modules/shop/pages/shop/shop.page";
+import AuthPage from "./modules/auth/pages/auth/auth.page";
+import CheckoutPage from "./modules/cart/pages/checkout/checkout.page";
 
-import Navbar from "./components/navbar/navbar.component";
+import Navbar from "./modules/common/components/navbar/navbar.component";
 import { selectCurrentUser } from "./store/user/user.selectors";
 import { checkUserSessionAction } from "./store/user/user.actions";
 
