@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
-import { auth } from "../../firebase/firebase.utils";
 import CartNavLink from "../cart-nav-link/cart-nav-link.component";
 import { selectCurrentUser } from "../../store/user/user.selectors";
 import { createStructuredSelector } from "reselect";
+import { signOutStartAction } from "../../store/user/user.actions";
 
 /**
  * Navigation bar used across all pages
@@ -14,7 +14,7 @@ import { createStructuredSelector } from "reselect";
  * @param {*} props
  * @type presentational component
  */
-const Navbar = ({ currentUser }) => {
+const Navbar = ({ currentUser, signOut }) => {
   return (
     <nav className=" flex justify-between items-end h-16 px-10 mb-10">
       <Link to="/">
@@ -29,10 +29,7 @@ const Navbar = ({ currentUser }) => {
         </Link>
 
         {currentUser ? (
-          <div
-            className="px-2 inline-block cursor-pointer"
-            onClick={() => auth.signOut()}
-          >
+          <div className="px-2 inline-block cursor-pointer" onClick={signOut}>
             SIGN OUT
           </div>
         ) : (
@@ -55,4 +52,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOutStartAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

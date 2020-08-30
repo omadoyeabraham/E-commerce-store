@@ -11,37 +11,13 @@ import AuthPage from "./pages/auth/auth.page";
 import CheckoutPage from "./pages/checkout/checkout.page";
 
 import Navbar from "./components/navbar/navbar.component";
-import UsersService from "./services/users.service";
-import { auth } from "./firebase/firebase.utils";
-import { setCurrentUser } from "./store/user/user.actions";
 import { selectCurrentUser } from "./store/user/user.selectors";
+import { checkUserSessionAction } from "./store/user/user.actions";
 
 class App extends React.Component {
-  unsubscribeFromAuth = null;
-
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (authUser) => {
-      if (authUser) {
-        const userRef = await UsersService.createAuthenticatedUserProfile(
-          authUser
-        );
-
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-          });
-        });
-      } else {
-        setCurrentUser(null);
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   render() {
@@ -76,7 +52,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  checkUserSession: () => dispatch(checkUserSessionAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

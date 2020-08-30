@@ -1,11 +1,18 @@
 import React from "react";
+import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
-import UserService from "../../services/users.service";
+import {
+  googleSignInStartAction,
+  emailSignInStartAction,
+} from "../../store/user/user.actions";
+import { connect } from "react-redux";
+import withLoadingSpinner from "../with-loading-spinner/with-loading-spinner.component";
+import { selectIsAuthenticating } from "../../store/user/user.selectors";
 
-export default class SignIn extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,13 +29,9 @@ export default class SignIn extends React.Component {
   handleSignIn = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
+    const { emailSignInStart } = this.props;
 
-    try {
-      await UserService.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
-    } catch (error) {
-      console.error(error);
-    }
+    emailSignInStart({ email, password });
   };
 
   /**
@@ -42,6 +45,8 @@ export default class SignIn extends React.Component {
   };
 
   render() {
+    const { googleSignInStart } = this.props;
+
     return (
       <div>
         <h2 className="font-bold text-3xl">I already have an account</h2>
@@ -79,7 +84,11 @@ export default class SignIn extends React.Component {
               Sign in
             </CustomButton>
 
-            <CustomButton type="submit" color="blue" onClick={signInWithGoogle}>
+            <CustomButton
+              type="button"
+              color="blue"
+              onClick={googleSignInStart}
+            >
               Sign in with google
             </CustomButton>
           </div>
@@ -88,3 +97,22 @@ export default class SignIn extends React.Component {
     );
   }
 }
+
+const mapStateToProps = createStructuredSelector({
+  isLoading: selectIsAuthenticating,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStartAction()),
+  emailSignInStart: (credentials) =>
+    dispatch(emailSignInStartAction(credentials)),
+});
+
+// export default connect(null, mapDispatchToProps)(SignIn);
+
+const SignInComponent = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withLoadingSpinner
+)(SignIn);
+
+export default SignInComponent;

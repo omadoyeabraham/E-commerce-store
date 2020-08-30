@@ -4,6 +4,7 @@ export const CartActionTypes = {
   DELETE_ITEM_FROM_CART: "DELETE_ITEM_FROM_CART",
   CHECKOUT_CART: "CHECKOUT_CART",
   TOGGLE_CART_HIDDEN: "TOGGLE_CART_HIDDEN",
+  CLEAR_CART: "CLEAR_CART",
 };
 
 /**
@@ -38,4 +39,8 @@ export const deleteItemFromCart = (item) => ({
 export const removeItemFromCart = (item) => ({
   type: CartActionTypes.REMOVE_ITEM_FROM_CART,
   payload: item,
+});
+
+export const clearCartAction = () => ({
+  type: CartActionTypes.CLEAR_CART,
 });

@@ -15,10 +15,19 @@ const config = {
 
 firebase.initializeApp(config);
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const googleAuthprovider = new firebase.auth.GoogleAuthProvider();
+export const googleAuthprovider = new firebase.auth.GoogleAuthProvider();
 googleAuthprovider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = () => auth.signInWithPopup(googleAuthprovider);

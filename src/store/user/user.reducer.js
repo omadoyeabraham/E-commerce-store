@@ -2,6 +2,8 @@ import UserActions from "./user.actions";
 
 const INITIAL_USER_STATE = {
   currentUser: null,
+  isAuthenticating: false,
+  authenticationErrorMessage: null,
 };
 
 /**
@@ -13,6 +15,35 @@ const UserReducer = (state = INITIAL_USER_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+
+    case UserActions.EMAIL_SIGN_IN_START:
+      return {
+        ...state,
+        isAuthenticating: true,
+      };
+
+    case UserActions.SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        currentUser: action.payload,
+        authenticationErrorMessage: null,
+        isAuthenticating: false,
+      };
+
+    case UserActions.SIGN_IN_FAILURE:
+    case UserActions.SIGN_OUT_FAILURE:
+      return {
+        ...state,
+        authenticationErrorMessage: action.payload,
+        isAuthenticating: false,
+      };
+
+    case UserActions.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+        authenticationErrorMessage: null,
       };
 
     default:
