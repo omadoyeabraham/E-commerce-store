@@ -22,6 +22,14 @@ export const fetchShopCollectionsStartAction = () => ({
 });
 
 /**
+ * Action creator for the fetch shop collection success action
+ */
+export const fetchShopCollectionsSuccessAction = (collections) => ({
+  type: SHOP_ACTIONS.FETCH_SHOP_COLLECTIONS_SUCCESS,
+  payload: collections,
+});
+
+/**
  * Action creator for the fetch shop collections failure action
  * @param {*} errorMessage
  */
