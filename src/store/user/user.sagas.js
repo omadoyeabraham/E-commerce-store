@@ -5,6 +5,8 @@ import UserActions, {
   signInFailureAction,
   signOutFailureAction,
   signOutSuccessAction,
+  signUpFailureAction,
+  signUpSuccessAction,
 } from "./user.actions";
 import {
   auth,
@@ -22,6 +24,8 @@ export function* userSagas() {
     call(onEmailSignInStartSaga),
     call(onCheckUserSessionSaga),
     call(onSignOutStartSaga),
+    call(onSignUpStartSaga),
+    call(onSignUpSuccessSaga),
   ]);
 }
 
@@ -39,6 +43,14 @@ export function* onCheckUserSessionSaga() {
 
 export function* onSignOutStartSaga() {
   yield takeLatest(UserActions.SIGN_OUT_START, signOut);
+}
+
+export function* onSignUpStartSaga() {
+  yield takeLatest(UserActions.SIGN_UP_START, signUp);
+}
+
+export function* onSignUpSuccessSaga() {
+  yield takeLatest(UserActions.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 // Generator function for user signin with Google
@@ -69,11 +81,26 @@ export function* signOut() {
   }
 }
 
-export function* getSnapShotFromUserAuth(userAuth) {
+export function* signUp({ payload: { displayName, email, password } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+
+    yield put(signUpSuccessAction({ user, additionalData: { displayName } }));
+  } catch (error) {
+    yield put(signUpFailureAction(error.message));
+  }
+}
+
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapShotFromUserAuth(user, additionalData);
+}
+
+export function* getSnapShotFromUserAuth(userAuth, additionalData) {
   try {
     const userRef = yield call(
       AuthService.createAuthenticatedUserProfile,
-      userAuth
+      userAuth,
+      additionalData
     );
     const userSnapshot = yield userRef.get();
 
@@ -91,7 +118,6 @@ export function* getSnapShotFromUserAuth(userAuth) {
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
-    console.log(userAuth);
     if (!userAuth) return;
 
     yield getSnapShotFromUserAuth(userAuth);

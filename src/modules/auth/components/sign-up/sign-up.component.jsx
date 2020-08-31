@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import FormInput from "../../../common/components/form-input/form-input.component";
 import CustomButton from "../../../common/components/custom-button/custom-button.component";
-import AuthService from "../../../auth/services/auth.service";
+import { signUpStartAction } from "../../../../store/user/user.actions";
 
 /**
  * Signup component used to regsiter a new user
@@ -26,30 +27,14 @@ class SignUp extends React.Component {
   handleSignUp = async (event) => {
     event.preventDefault();
     const { displayName, email, password, confirmPassword } = this.state;
+    const { signUp } = this.props;
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
-    try {
-      const { user } = await AuthService.signUpWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await AuthService.createAuthenticatedUserProfile(user, {
-        displayName,
-      });
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    signUp({ displayName, email, password });
   };
 
   /**
@@ -128,4 +113,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  signUp: (signUpData) => dispatch(signUpStartAction(signUpData)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

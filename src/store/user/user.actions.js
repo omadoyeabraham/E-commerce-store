@@ -9,6 +9,9 @@ const UserActions = {
   SIGN_OUT_START: "SIGN_OUT_START",
   SIGN_OUT_SUCCESS: "SIGN_OUT_SUCCESS",
   SIGN_OUT_FAILURE: "SIGN_OUT_FAILURE",
+  SIGN_UP_START: "SIGN_UP_START",
+  SIGN_UP_SUCCESS: "SIGN_UP_SUCCESS",
+  SIGN_UP_FAILURE: "SIGN_UP_FAILURE",
   CHECK_USER_SESSION: "CHECK_USER_SESSION",
 };
 
@@ -41,6 +44,21 @@ export const signOutSuccessAction = () => ({
 
 export const signOutFailureAction = (errorMessage) => ({
   type: UserActions.SIGN_OUT_FAILURE,
+  payload: errorMessage,
+});
+
+export const signUpStartAction = (signUpPayload) => ({
+  type: UserActions.SIGN_UP_START,
+  payload: signUpPayload,
+});
+
+export const signUpSuccessAction = ({ user, additionalData }) => ({
+  type: UserActions.SIGN_UP_SUCCESS,
+  payload: { user, additionalData },
+});
+
+export const signUpFailureAction = (errorMessage) => ({
+  type: UserActions.SIGN_UP_FAILURE,
   payload: errorMessage,
 });
 
